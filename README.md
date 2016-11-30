@@ -1,6 +1,6 @@
 # Queued-USART-Transmission
 Queued USART Transmission using Interrupt for ATmega328p.<br>
-This project uses UDRE interrupt for serial transmission.
+This project uses UDRE interrupt for serial transmission.<br>
 For the principle, read the bottom.
 
 # Content in this Project
@@ -87,8 +87,8 @@ To send a string:
 sendString("abc");
 ```
 # Principle
-When we use polling method, the program waits until UDR0 is empty and sends a character then. The processor cannot do other things while waiting. The use of interrupt reduce the occupation of processor.<br>
+When we use polling method, the program waits until UDR0 is empty and sends a character then. The processor cannot do other things while waiting. The use of interrupt reduce the occupation of processor.<br><br>
 UDRE interrupt is used. The interrupt is triggered once UDR0 is empty. When UDR0 is empty, a character can be sent. Therefore, we can make use of this interrupt to send characters one by one in every execution of the interrupt.<br>
-Sometimes lots of characters are going to be sent. However, the processor can send a single character at the same time only. A queue is required to make sure all characters can be sent successfully.<br>
-First-In-First-Out(FIFO) queue is used in this project. When some characters are going to be sent, they are put at the end of the queue. When UDR0 is empty for transmission, the first character of the queue is sent.<br>
+Sometimes lots of characters are going to be sent. However, the processor can send a single character at the same time only. A queue is required to make sure all characters can be sent successfully.<br><br>
+First-In-First-Out(FIFO) queue is used in this project. When some characters are going to be sent, they are put at the end of the queue. When UDR0 is empty for transmission, the first character of the queue is sent.<br><br>
 Unless you have a paragraph of characters to send at the same time, this program should be able to transmit strings or chars and minimize the effect on the main program flow.
